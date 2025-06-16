@@ -3,8 +3,8 @@
 #include <math.h>
 #include <time.h>
 
-#define largura_matriz 3 //aqui vc define a largura que quer que sua matriz tenha
-#define altura_matriz 3 // e aqui, a altura
+#define largura_matriz 800 //aqui vc define a largura que quer que sua matriz tenha
+#define altura_matriz 800 // e aqui, a altura
 
 int ehPrimo(int n){
     if (n < 2){
@@ -26,7 +26,7 @@ void imprimirMatriz (int matriz[altura_matriz][largura_matriz]){
     for (int i = 0; i < altura_matriz; i++){
         for (int j = 0; j < largura_matriz; j++){
             matriz[i][j] = rand() % 4000;
-            printf("%4d ", matriz[i][j]);
+            printf(" %4d ", matriz[i][j]);
         }
         printf("\n");
     }
@@ -51,10 +51,18 @@ int main() {
     int matriz_principal[altura_matriz][largura_matriz];
 
     srand(time(NULL)); //gera numeros aleatorios
+
+    clock_t inicio = clock(); //inicio da contagem de tempo de compilacao
+
     imprimirMatriz(matriz_principal);
     int n_primos = contaPrimos(matriz_principal);
 
+    clock_t fim = clock(); //fim da contagem de tempo de compilacao
+
+    double duracao_exec = (double) (fim - inicio) / CLOCKS_PER_SEC;
+
     printf("\nTotal de primos encontrados: %d\n", n_primos);
+    printf("\nO tempo total de execucao foi de: %.6f segundos", duracao_exec);
 
     return 0;
 }
